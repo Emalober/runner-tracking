@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/runFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_directions_run_black_24dp"
+        android:title="@string/text_label_run"/>
+    <item
+        android:id="@+id/statisticsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bar_chart_black_24dp"
+        android:title="@string/text_label_statistics"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/text_label_settings"/>
+</menu>

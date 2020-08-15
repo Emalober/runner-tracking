@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/setupFragment">
+
+    <fragment
+        android:id="@+id/runFragment"
+        android:name="com.ar.maloba.runnertracking.ui.fragments.RunFragment"
+        android:label="run_fragment"
+        tools:layout="@layout/run_fragment" >
+        <action
+            android:id="@+id/action_runFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ar.maloba.runnertracking.ui.fragments.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.ar.maloba.runnertracking.ui.fragments.SetupFragment"
+        android:label="setup_fragment"
+        tools:layout="@layout/setup_fragment" >
+        <action
+            android:id="@+id/action_setupFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.ar.maloba.runnertracking.ui.fragments.StatisticsFragment"
+        android:label="statistics_fragment"
+        tools:layout="@layout/statistics_fragment" />
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.ar.maloba.runnertracking.ui.fragments.TrackingFragment"
+        android:label="tracking_fragment"
+        tools:layout="@layout/tracking_fragment" >
+        <action
+            android:id="@+id/action_trackingFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+</navigation>

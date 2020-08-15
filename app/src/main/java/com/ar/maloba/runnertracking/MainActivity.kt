@@ -3,27 +3,38 @@ package com.ar.maloba.runnertracking
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.ar.maloba.runnertracking.data.RunDAO
-import com.ar.maloba.runnertracking.ui.main.MainFragment
+import com.ar.maloba.runnertracking.ui.fragments.RunFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var runDao: RunDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
-                    .commitNow()
-        }
-        Log.d("MainActivity", "RunDAO: ${runDao.toString()}")
 
+        setSupportActionBar(toolbar)
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as NavHostFragment? ?: return
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        bottomNavigationView.setupWithNavController(navController)
+
+        navHostFragment.findNavController()
+            .addOnDestinationChangedListener { _, destination, _ ->
+                when(destination.id) {
+                    R.id.settingsFragment, R.id.runFragment, R.id.statisticsFragment ->
+                        bottomNavigationView.visibility = View.VISIBLE
+                    else -> bottomNavigationView.visibility = View.GONE
+                }
+            }
     }
 }

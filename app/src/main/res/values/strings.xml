@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">RunnerTracking</string>
     <string name="google_maps_key">AIzaSyARLZiKhKP4TVOZE2APNxHDBUmPn8suKKw</string>
+
+    <string name="text_label_run">Your Runs</string>
+    <string name="text_label_statistics">Statistics</string>
+    <string name="text_label_settings">Settings</string>
+
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
+
 </resources>
