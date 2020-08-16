@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RunnerTracking</string>
-    <string name="google_maps_key">AIzaSyARLZiKhKP4TVOZE2APNxHDBUmPn8suKKw</string>
+    <string name="google_maps_key">AIzaSyBW71yM5VAJhYdY8AFUddbnO65aIcUVPOE</string>
 
     <string name="text_label_run">Your Runs</string>
     <string name="text_label_statistics">Statistics</string>
