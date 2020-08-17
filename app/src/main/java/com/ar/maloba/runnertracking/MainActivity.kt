@@ -1,5 +1,6 @@
 package com.ar.maloba.runnertracking
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ar.maloba.runnertracking.Constants.ACTION_SHOW_TRACKING_FRAGMENTE
 import com.ar.maloba.runnertracking.data.RunDAO
 import com.ar.maloba.runnertracking.ui.fragments.RunFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +19,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navHostFragment: NavHostFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -24,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment? ?: return
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNavigationView.setupWithNavController(navController)
 
@@ -36,5 +40,19 @@ class MainActivity : AppCompatActivity() {
                     else -> bottomNavigationView.visibility = View.GONE
                 }
             }
+
+        navigateToTrackingFragmentIfNeeded(intent)
+
+    }
+
+    private fun navigateToTrackingFragmentIfNeeded(intent: Intent?) {
+        if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENTE) {
+            navHostFragment.findNavController().navigate(R.id.action_global_trackingFragment)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navigateToTrackingFragmentIfNeeded(intent)
     }
 }
