@@ -1,6 +1,7 @@
 package com.ar.maloba.runnertracking
 
 import android.graphics.Color
+import java.text.SimpleDateFormat
 
 object Constants {
     const val RUNNING_DATABASE_NAME = "running_db"
@@ -13,6 +14,10 @@ object Constants {
 
     const val LOCATION_UPDATE_INTERVAL = 5000L
     const val FASTEST_LOCATION_INTERVAL = 2000L
+
+    const val TIMER_UPDATE_INTERVAL = 50L
+    const val TIME_FULL_FORMAT = "HH:mm:ss.SSS"
+    const val TIME_SHORT_FORMAT = "HH:mm:ss"
 
     const val NOTIFICATION_CHANNEL_ID = "tracking_channel"
     const val NOTIFICATION_CHANNEL_NAME = "Tracking"

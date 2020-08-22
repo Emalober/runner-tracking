@@ -12,6 +12,7 @@ import com.ar.maloba.runnertracking.Constants.MAP_ZOOM
 import com.ar.maloba.runnertracking.Constants.POLYLINE_COLOR
 import com.ar.maloba.runnertracking.Constants.POLYLINE_WIDTH
 import com.ar.maloba.runnertracking.R
+import com.ar.maloba.runnertracking.TrackingUtility
 import com.ar.maloba.runnertracking.services.Polyline
 import com.ar.maloba.runnertracking.services.TrackingService
 import com.ar.maloba.runnertracking.ui.viewmodels.MainViewModel
@@ -28,6 +29,8 @@ class TrackingFragment : Fragment(R.layout.tracking_fragment) {
     private var pathPoints = mutableListOf<Polyline>()
 
     private var map: GoogleMap? = null
+
+    private var curTimeInMillis = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,6 +54,12 @@ class TrackingFragment : Fragment(R.layout.tracking_fragment) {
             pathPoints = it
             addLatestPolyline()
             moveCameraToUser()
+        })
+
+        TrackingService.timeRunInMillis.observe(viewLifecycleOwner, Observer {
+            curTimeInMillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis, true)
+            tvTimer.text = formattedTime
         })
     }
 
