@@ -18,6 +18,7 @@ object Constants {
     const val TIMER_UPDATE_INTERVAL = 50L
     const val TIME_FULL_FORMAT = "HH:mm:ss.SSS"
     const val TIME_SHORT_FORMAT = "HH:mm:ss"
+    const val DATE_FORMAT = "dd/MM/yy"
 
     const val NOTIFICATION_CHANNEL_ID = "tracking_channel"
     const val NOTIFICATION_CHANNEL_NAME = "Tracking"

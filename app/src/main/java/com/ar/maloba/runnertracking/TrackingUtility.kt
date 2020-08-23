@@ -15,6 +15,7 @@ object TrackingUtility {
 
     private val formatterFullTimer by lazy { SimpleDateFormat(Constants.TIME_FULL_FORMAT) }
     private val formatterShortTimer by lazy { SimpleDateFormat(Constants.TIME_SHORT_FORMAT) }
+    private val formatterDate by lazy { SimpleDateFormat(Constants.DATE_FORMAT) }
     private val offset by lazy { TimeZone.getDefault().getOffset(Date().time) }
 
     fun hasLocationPermissions(context: Context)  =
@@ -34,6 +35,13 @@ object TrackingUtility {
             formatterFullTimer.format(Date(ms - offset))
         else
             formatterShortTimer.format(Date(ms - offset))
+    }
+
+    fun getFormattedDate(timestamp: Long): String {
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = timestamp
+        }
+        return formatterDate.format(calendar.time)
     }
 
     fun calculatePolylineLength(polyline: Polyline): Float {
