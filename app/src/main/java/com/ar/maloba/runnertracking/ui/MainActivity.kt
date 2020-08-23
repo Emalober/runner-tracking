@@ -1,20 +1,16 @@
-package com.ar.maloba.runnertracking
+package com.ar.maloba.runnertracking.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ar.maloba.runnertracking.Constants.ACTION_SHOW_TRACKING_FRAGMENTE
-import com.ar.maloba.runnertracking.data.RunDAO
-import com.ar.maloba.runnertracking.ui.fragments.RunFragment
+import com.ar.maloba.runnertracking.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.ar.maloba.runnertracking.Constants
 import com.ar.maloba.runnertracking.Constants.NOTIFICATION_CHANNEL_ID
-import com.ar.maloba.runnertracking.MainActivity
+import com.ar.maloba.runnertracking.ui.MainActivity
 import com.ar.maloba.runnertracking.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module

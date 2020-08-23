@@ -25,7 +25,7 @@ import com.ar.maloba.runnertracking.Constants.NOTIFICATION_CHANNEL_ID
 import com.ar.maloba.runnertracking.Constants.NOTIFICATION_CHANNEL_NAME
 import com.ar.maloba.runnertracking.Constants.NOTIFICATION_ID
 import com.ar.maloba.runnertracking.Constants.TIMER_UPDATE_INTERVAL
-import com.ar.maloba.runnertracking.MainActivity
+import com.ar.maloba.runnertracking.ui.MainActivity
 import com.ar.maloba.runnertracking.R
 import com.ar.maloba.runnertracking.TrackingUtility
 import com.google.android.gms.location.FusedLocationProviderClient
