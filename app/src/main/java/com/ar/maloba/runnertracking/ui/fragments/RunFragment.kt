@@ -33,7 +33,7 @@ class RunFragment : Fragment(R.layout.run_fragment), EasyPermissions.PermissionC
         requestPermissions()
         setupRecycleView()
 
-        when(viewModel.sortType) {
+        when(viewModel.sortType.value) {
             SortType.DATE -> spFilter.setSelection(0)
             SortType.RUNNING_TIME -> spFilter.setSelection(1)
             SortType.DISTANCE -> spFilter.setSelection(2)
