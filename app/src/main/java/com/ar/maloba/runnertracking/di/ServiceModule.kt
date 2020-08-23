@@ -2,10 +2,16 @@ package com.ar.maloba.runnertracking.di
 
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.core.app.NotificationCompat
 import com.ar.maloba.runnertracking.Constants
+import com.ar.maloba.runnertracking.Constants.KEY_FIRST_TIME_TOGGLE
+import com.ar.maloba.runnertracking.Constants.KEY_NAME
+import com.ar.maloba.runnertracking.Constants.KEY_WEIGHT
 import com.ar.maloba.runnertracking.Constants.NOTIFICATION_CHANNEL_ID
+import com.ar.maloba.runnertracking.Constants.SHARE_PREFERENCES_NAME
 import com.ar.maloba.runnertracking.ui.MainActivity
 import com.ar.maloba.runnertracking.R
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -15,6 +21,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ServiceComponent::class)
