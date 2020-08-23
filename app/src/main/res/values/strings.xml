@@ -6,6 +6,9 @@
     <string name="text_label_statistics">Statistics</string>
     <string name="text_label_settings">Settings</string>
     <string name="message_need_location_permissions">You need to accept location permissions to use this app.</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="cancel_run_title">Cancel Run</string>
 
     <string-array name="filter_options">
         <item>Date</item>
