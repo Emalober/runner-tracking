@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.setOnNavigationItemReselectedListener { }
 
         navHostFragment.findNavController()
             .addOnDestinationChangedListener { _, destination, _ ->

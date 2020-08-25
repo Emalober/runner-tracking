@@ -1,9 +1,11 @@
 package com.ar.maloba.runnertracking.ui.fragments
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -31,6 +33,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.tracking_fragment.*
 import java.util.*
 import javax.inject.Inject
+
+const val CANCEL_TRACKING_DIALOG_TAG = "cancelTrackingDialogTag"
 
 @AndroidEntryPoint
 class TrackingFragment : Fragment(R.layout.tracking_fragment) {
@@ -73,6 +77,12 @@ class TrackingFragment : Fragment(R.layout.tracking_fragment) {
             endRunAndSaveToDb()
         }
 
+        if(savedInstanceState != null) {
+            val canceldialog = parentFragmentManager.findFragmentByTag(
+                CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+            canceldialog?.setOnClickYesListener { stopRun() }
+
+        }
         suscribeToObservers()
     }
 
@@ -96,10 +106,10 @@ class TrackingFragment : Fragment(R.layout.tracking_fragment) {
 
     private fun updateTracking(isTracking: Boolean) {
         this.isTracking = isTracking
-        if(!isTracking) {
+        if(!isTracking && curTimeInMillis > 0L) {
             btnToggleRun.text = getString(R.string.start)
             btnFinishRun.visibility = View.VISIBLE
-        } else {
+        } else if (isTracking) {
             btnToggleRun.text = getString(R.string.stop)
             this.menu?.getItem(0)?.isVisible = true
             btnFinishRun.visibility = View.GONE
@@ -133,22 +143,15 @@ class TrackingFragment : Fragment(R.layout.tracking_fragment) {
     }
 
     private fun showCancelTrackingDialog() {
-        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-            .setTitle("Cancel the Run?")
-            .setMessage("Are you sure to cancel the current run and delate all its data?")
-            .setIcon(R.drawable.ic_delete)
-            .setPositiveButton("Yes") { _, _ ->
-                 stopRun()
+        val dialog = CancelTrackingDialog().apply {
+            setOnClickYesListener {
+                stopRun()
             }
-            .setNegativeButton("No") { dialogInterface, _ ->
-                dialogInterface.cancel()
-            }
-            .create()
-
-        dialog.show()
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG_TAG)
     }
 
     private fun stopRun() {
+        tvTimer.text = "00:00:00.000"
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }
@@ -266,5 +269,31 @@ class TrackingFragment : Fragment(R.layout.tracking_fragment) {
         super.onSaveInstanceState(outState)
         mapView?.onSaveInstanceState(outState)
 
+    }
+}
+
+
+class CancelTrackingDialog : DialogFragment() {
+
+    private var onClickYesListener: (() -> Unit)? = null
+
+    fun setOnClickYesListener(listener: () -> Unit) {
+        onClickYesListener = listener
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+            .setTitle("Cancel the Run?")
+            .setMessage("Are you sure to cancel the current run and delate all its data?")
+            .setIcon(R.drawable.ic_delete)
+            .setPositiveButton("Yes") { _, _ ->
+                onClickYesListener?.let {
+                    it()
+                }
+            }
+            .setNegativeButton("No") { dialogInterface, _ ->
+                dialogInterface.cancel()
+            }
+            .create()
     }
 }
